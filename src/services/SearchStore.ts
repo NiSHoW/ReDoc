@@ -1,4 +1,3 @@
-import { IS_BROWSER } from '../utils/';
 import { IMenuItem } from './MenuStore';
 import { OperationModel } from './models';
 
@@ -6,15 +5,11 @@ import Worker from './SearchWorker.worker';
 
 let worker: new () => Worker;
 
-if (IS_BROWSER) {
-  try {
-    // tslint:disable-next-line
-    worker = require('workerize-loader?inline&fallback=false!./SearchWorker.worker');
-  } catch (e) {
-    worker = require('./SearchWorker.worker').default;
-  }
-} else {
-  worker = require('./SearchWorker.worker').default;
+try {
+  // tslint:disable-next-line
+  worker = require('workerize-loader?inline&fallback=false!./SearchWorker.worker');
+} catch (e) {
+  worker = require('./SearchWorker.worker');
 }
 
 export class SearchStore<T> {

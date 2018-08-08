@@ -51,18 +51,18 @@ export class MenuItem extends React.Component<MenuItemProps> {
         {item.type === 'operation' ? (
           <OperationMenuItemContent {...this.props} item={item as OperationModel} />
         ) : (
-          <MenuItemLabel depth={item.depth} active={item.active || item.expanded} type={item.type}>
-            <MenuItemTitle title={item.name}>
-              {item.name}
-              {this.props.children}
-            </MenuItemTitle>
-            {(item.depth > 0 &&
-              item.items.length > 0 && (
-                <ShelfIcon float={'right'} direction={item.expanded ? 'down' : 'right'} />
-              )) ||
-              null}
-          </MenuItemLabel>
-        )}
+            <MenuItemLabel depth={item.depth} active={item.active || item.expanded} type={item.type}>
+              <MenuItemTitle title={item.name}>
+                {item.name}
+                {this.props.children}
+              </MenuItemTitle>
+              {(item.depth > 0 &&
+                item.items.length > 0 && (
+                  <ShelfIcon float={'right'} direction={item.expanded ? 'down' : 'right'} />
+                )) ||
+                null}
+            </MenuItemLabel>
+          )}
         {!withoutChildren &&
           item.items &&
           item.items.length > 0 && (
@@ -85,10 +85,9 @@ export interface OperationMenuItemContentProps {
 @observer
 class OperationMenuItemContent extends React.Component<OperationMenuItemContentProps> {
   render() {
-    const { item, className } = this.props;
+    const { item } = this.props;
     return (
       <MenuItemLabel
-        className={className}
         depth={item.depth}
         active={item.active}
         deprecated={item.deprecated}

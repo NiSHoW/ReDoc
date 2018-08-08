@@ -1,4 +1,4 @@
-export const IS_BROWSER = typeof window !== 'undefined' && 'HTMLElement' in window;
+export const IS_BROWSER = false; //= typeof window !== 'undefined' && 'HTMLElement' in window;
 
 export function querySelector(selector: string): Element | null {
   if (typeof document !== 'undefined') {
@@ -31,7 +31,7 @@ export function normalizeHash(hash: string): string {
 // scrollIntoViewIfNeeded polyfill
 
 if (typeof Element !== 'undefined' && !(Element as any).prototype.scrollIntoViewIfNeeded) {
-  (Element as any).prototype.scrollIntoViewIfNeeded = function(centerIfNeeded) {
+  (Element as any).prototype.scrollIntoViewIfNeeded = function (centerIfNeeded) {
     centerIfNeeded = arguments.length === 0 ? true : !!centerIfNeeded;
 
     const parent = this.parentNode;

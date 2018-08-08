@@ -53,8 +53,7 @@ export function init(
   }
 
   render(
-    React.createElement(
-      RedocStandalone,
+    React.createElement(RedocStandalone as any,
       {
         spec,
         onLoaded: callback,

@@ -126,7 +126,7 @@ export class SearchBox extends React.PureComponent<SearchBoxProps, SearchBoxStat
     return (
       <SearchWrap role="search">
         {this.state.term && <ClearIcon onClick={this.clear}>×</ClearIcon>}
-        <SearchIcon />
+        <SearchIcon className="search-btn" />
         <SearchInput
           value={this.state.term}
           onKeyDown={this.handleKeyDown}

@@ -35,7 +35,7 @@ export default (env: { standalone?: boolean } = {}, { mode }) => ({
     filename: env.standalone ? 'redoc.standalone.js' : 'redoc.lib.js',
     path: path.join(__dirname, '/bundles'),
     library: 'Redoc',
-    libraryTarget: 'umd',
+    libraryTarget: 'amd',
     globalObject: 'this',
   },
 
@@ -52,24 +52,24 @@ export default (env: { standalone?: boolean } = {}, { mode }) => ({
   performance: false,
 
   optimization: {
-    minimize: !!env.standalone,
+    minimize: false, //!!env.standalone,
   },
 
   externals: env.standalone
     ? {
-        esprima: 'esprima',
-        'node-fetch': 'null',
-      }
+      // esprima: 'esprima',
+      // 'node-fetch': 'null',
+    }
     : (context, request, callback) => {
-        // ignore node-fetch dep of swagger2openapi as it is not used
-        if (/node-fetch$/i.test(request)) {
-          return callback(null, 'var undefined');
-        }
-        if (/esprima$/i.test(request)) {
-          return callback(null, 'var undefined');
-        }
-        return nodeExternals(context, request, callback);
-      },
+      // ignore node-fetch dep of swagger2openapi as it is not used
+      if (/node-fetch$/i.test(request)) {
+        return callback(null, 'var undefined');
+      }
+      if (/esprima$/i.test(request)) {
+        return callback(null, 'var undefined');
+      }
+      return nodeExternals(context, request, callback);
+    },
 
   module: {
     rules: [
@@ -95,8 +95,8 @@ export default (env: { standalone?: boolean } = {}, { mode }) => ({
                 [
                   'babel-plugin-styled-components',
                   {
-                    minify: true,
-                    displayName: mode !== 'production',
+                    minify: false,
+                    displayName: mode !== 'production' ? true : true,
                   },
                 ],
               ],
